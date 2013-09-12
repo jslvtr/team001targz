@@ -72,7 +72,7 @@ public class Ffmpeg {
         private String _system(String cmd) {
                 String output = "";
                 try {
-                        Process p = Runtime.getRuntime().exec(cmd);
+                	Process p = new ProcessBuilder(cmd).start();
                         p.waitFor();
                         BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         String line=reader.readLine();

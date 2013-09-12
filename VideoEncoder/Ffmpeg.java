@@ -31,7 +31,13 @@ public class Ffmpeg {
                 //Get and parse video info
                 String[] info = getFileInfo(src).split("\n");
                 Parser parser = new Parser(info);
-                String previousType = src.getName().split(".")[1];
+                String previousType;
+                try {
+                        previousType = parser.getVideoType();
+                } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                        return false;
+                }
                 
                 //Record the starting time
 		int startTime = (int) (System.currentTimeMillis() / 1000L);

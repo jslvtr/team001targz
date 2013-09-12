@@ -1,5 +1,4 @@
-public class Parser {
-	
+public class Parser {        
 	private String[] lines;
 	
 	public Parser(String[] lines) {

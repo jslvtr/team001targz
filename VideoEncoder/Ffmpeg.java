@@ -16,7 +16,8 @@ public class Ffmpeg {
 	public String getFileInfo(File file) {
 		// RUN `ffmpeg -i <file>
 		String cmd = "ffmpeg -i \"" + file.getAbsolutePath() + "\"";
-                return _system(cmd);
+                //System.out.println(cmd);
+		return _system(cmd);
 	}
 	
 	/**
@@ -76,7 +77,8 @@ public class Ffmpeg {
                         BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         String line=reader.readLine();
 
-                        while (line != null) {    
+                        while (line != null) {
+				System.out.println(line);
                             output += line + "\n";
                             line = reader.readLine();
                         }

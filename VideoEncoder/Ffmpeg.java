@@ -15,7 +15,7 @@ public class Ffmpeg {
 	 */
 	public String getFileInfo(File file) {
 		// RUN `ffmpeg -i <file>
-		String cmd = "ffmpeg -i \"" + file.getAbsolutePath() + "\"";
+		String cmd = "ffmpeg -i " + file.getAbsolutePath();
                 //System.out.println(cmd);
 		return _system(cmd);
 	}
@@ -44,7 +44,7 @@ public class Ffmpeg {
 		int startTime = (int) (System.currentTimeMillis() / 1000L);
 		
                 //Run the convert command
-                String cmd = "ffmpeg -i \"" + src.getAbsolutePath() + "\" -vcodec libx264 -acodec libfdk_aac -vb 2500000 -ab 192000 -preset fast \"" + dest.getAbsolutePath() + "\"";
+                String cmd = "ffmpeg -i " + src.getAbsolutePath() + " -vcodec libx264 -acodec libfdk_aac -vb 2500000 -ab 192000 -preset fast " + dest.getAbsolutePath();
                 _system(cmd);
                 
                 //Record the ending time

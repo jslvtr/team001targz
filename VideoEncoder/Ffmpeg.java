@@ -81,8 +81,8 @@ public class Ffmpeg {
                             line = reader.readLine();
                         }
                 }
-                catch(IOException ex) {}
-                catch(InterruptedException ex) {}
+                catch(IOException ex) { ex.printStackTrace(); }
+                catch(InterruptedException ex) { ex.printStackTrace(); }
                 
                 return output;
         }

@@ -21,7 +21,7 @@ public class Ffmpeg {
 		fileinfo = file.getAbsolutePath();
 		
         //System.out.println(cmd);
-		return _system("");
+		return _system(null);
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class Ffmpeg {
 		int startTime = (int) (System.currentTimeMillis() / 1000L);
 		
         //Run the convert command
-        String cmd = "ffmpeg -i " + src.getAbsolutePath() + " -vcodec libx264 -acodec libfdk_aac -vb 2500000 -ab 192000 -preset fast " + dest.getAbsolutePath();
+        String[] cmd = {"ffmpeg","-i", src.getAbsolutePath(), "-vcodec", "libx264", "-acodec", "libfdk_aac", "-vb", "2500000", "-ab", "192000", "-preset", "fast", dest.getAbsolutePath()};
         _system(cmd);
         
         //Record the ending time
@@ -73,11 +73,11 @@ public class Ffmpeg {
 		return true;
 	}
         
-        private String _system(String cmd) {
+        private String _system(String[] cmd) {
         	
             String output = "";
             try {
-            	ProcessBuilder pb = cmd == "" ? new ProcessBuilder("ffmpeg", "-i", fileinfo) : new ProcessBuilder(cmd);
+            	ProcessBuilder pb = cmd == null ? new ProcessBuilder("ffmpeg", "-i", fileinfo) : new ProcessBuilder(cmd);
             	pb.redirectErrorStream(true);
             	Process p = pb.start();
             	BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));

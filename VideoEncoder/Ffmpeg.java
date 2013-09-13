@@ -18,11 +18,10 @@ public class Ffmpeg {
 	 */
 	public String getFileInfo(File file) {
 		// RUN `ffmpeg -i <file>
-		String cmd = "ffmpeg -i " + file.getAbsolutePath();
 		fileinfo = file.getAbsolutePath();
 		
         //System.out.println(cmd);
-		return _system();
+		return _system("");
 	}
 	
 	/**
@@ -80,9 +79,7 @@ public class Ffmpeg {
             try {
             	ProcessBuilder pb = cmd == "" ? new ProcessBuilder("ffmpeg", "-i", fileinfo) : new ProcessBuilder(cmd);
             	Process p = pb.start();
-            	
-                p.waitFor();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            	BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 String line=reader.readLine();
 
                 while (line != null) {
@@ -90,6 +87,7 @@ public class Ffmpeg {
                     output += line + "\n";
                     line = reader.readLine();
                 }
+                p.waitFor();
             }
             catch(IOException ex) { ex.printStackTrace(); }
             catch(InterruptedException ex) { ex.printStackTrace(); }

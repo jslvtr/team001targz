@@ -9,8 +9,7 @@ import java.util.logging.Logger;
 
 public class Ffmpeg {
 	
-	private static final String fileinfo = "fileinfo.txt";
-	private static FileWriter writer;
+	private String fileinfo = "fileinfo.txt";
 	
 	/**
 	 * Returns a string containing the file
@@ -20,9 +19,10 @@ public class Ffmpeg {
 	public String getFileInfo(File file) {
 		// RUN `ffmpeg -i <file>
 		String cmd = "ffmpeg -i " + file.getAbsolutePath();
+		fileinfo = file.getAbsolutePath();
 		
         //System.out.println(cmd);
-		return _system(cmd);
+		return _system();
 	}
 	
 	/**
@@ -76,34 +76,9 @@ public class Ffmpeg {
         
         private String _system(String cmd) {
         	
-        	File f = new File(fileinfo);
-    		try {
-    			f.createNewFile();
-    			writer = new FileWriter(fileinfo);
-    		} catch (Exception e) {
-    			System.out.println("Error creating commands file");
-    			e.printStackTrace();
-    		}
-    		
-    		try {
-    			writer.write(cmd);
-    		} catch (Exception e) {
-    			e.printStackTrace();
-    		} finally {
-    			try {
-    				writer.close();
-    			} catch (IOException e) {
-    				System.out.println("Error closing the File Writer.");
-    				e.printStackTrace();
-    			}
-    		}
-        	
             String output = "";
             try {
-            	ProcessBuilder pb = new ProcessBuilder();
-            	
-            	File commands = new File(fileinfo);
-            	pb.redirectInput(commands);
+            	ProcessBuilder pb = cmd == "" ? new ProcessBuilder("ffmpeg", "-i", fileinfo) : new ProcessBuilder(cmd);
             	Process p = pb.start();
             	
                 p.waitFor();

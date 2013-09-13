@@ -46,26 +46,16 @@ public class VideosEncoded {
 		}
 
 		String line;
+		int index = 0;
 		try {
 			while((line = br.readLine()) != null) {
 				l.add(line);
+				lines[index] = new Video(line.split(",")[0], line.split(",")[1], line.split(",")[2], Integer.parseInt(line.split(",")[3]));
+				index++;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 			line = null;
-		}
-
-		for(int i2 = 0; i2 < 10; i2++) {
-			try {
-				if(l.get(i2) != null) lines[i2] = new Video(l.get(i2).split(",")[0], l.get(i2).split(",")[1], l.get(i2).split(",")[2], Integer.parseInt(l.get(i2).split(",")[3]));
-			} catch (IndexOutOfBoundsException e) {
-				//System.out.println("Unable to convert to int.");
-				//e.printStackTrace();
-				System.out.println("There are " + i2 + " videos in the list.");
-				break;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 		
 		try {
@@ -82,6 +72,7 @@ public class VideosEncoded {
 		Video[] newVideos = new Video[videos.length];
 		for(int i = 1; i < videos.length; i++) {
 			newVideos[i] = videos[i-1];
+			System.out.println(videos[i-1].getPath());
 		}
 		newVideos[0] = newVideo;
 		for(Video video : newVideos) {
@@ -99,13 +90,18 @@ public class VideosEncoded {
 				
 				try {
 					writer.write(path + "," + type + "," + duration + "," + String.valueOf(encodeTime) + "\n");
-					writer.flush();
 				} catch (IOException e) {
 					System.out.println("Error writing Video file info to Last Videos Encoded file.");
 					e.printStackTrace();
 					return false;
 				}
 			}
+		}
+		try {
+			writer.flush();
+		} catch (IOException e) {
+			System.out.println("Couldn't flush the writer.");
+			//e.printStackTrace();
 		}
 		return true;
 	}

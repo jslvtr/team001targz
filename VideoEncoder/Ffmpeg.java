@@ -69,8 +69,7 @@ public class Ffmpeg {
         //Add to queue
         VideosEncoded ve = new VideosEncoded();
         ve.push(video);
-		
-		//END TIMER (RESULT IN MS)
+        
 		return true;
 	}
         

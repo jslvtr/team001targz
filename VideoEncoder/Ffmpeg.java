@@ -20,27 +20,7 @@ public class Ffmpeg {
 	public String getFileInfo(File file) {
 		// RUN `ffmpeg -i <file>
 		String cmd = "ffmpeg -i " + file.getAbsolutePath();
-		File f = new File(fileinfo);
-		try {
-			f.createNewFile();
-			writer = new FileWriter(fileinfo);
-		} catch (Exception e) {
-			System.out.println("Error creating commands file");
-			e.printStackTrace();
-		}
 		
-		try {
-			writer.write(cmd);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				writer.close();
-			} catch (IOException e) {
-				System.out.println("Error closing the File Writer.");
-				e.printStackTrace();
-			}
-		}
         //System.out.println(cmd);
 		return _system(cmd);
 	}
@@ -95,6 +75,29 @@ public class Ffmpeg {
 	}
         
         private String _system(String cmd) {
+        	
+        	File f = new File(fileinfo);
+    		try {
+    			f.createNewFile();
+    			writer = new FileWriter(fileinfo);
+    		} catch (Exception e) {
+    			System.out.println("Error creating commands file");
+    			e.printStackTrace();
+    		}
+    		
+    		try {
+    			writer.write(cmd);
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		} finally {
+    			try {
+    				writer.close();
+    			} catch (IOException e) {
+    				System.out.println("Error closing the File Writer.");
+    				e.printStackTrace();
+    			}
+    		}
+        	
             String output = "";
             try {
             	ProcessBuilder pb = new ProcessBuilder();

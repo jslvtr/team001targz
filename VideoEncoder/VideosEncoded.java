@@ -60,8 +60,8 @@ public class VideosEncoded {
 			try {
 				if(l.get(i2) != null) lines[i2] = new Video(l.get(i2).split(",")[0], l.get(i2).split(",")[1], l.get(i2).split(",")[2], Integer.parseInt(l.get(i2).split(",")[3]));
 			} catch (Exception e) {
-				System.out.println("Unable to convert to int.");
-				e.printStackTrace();
+				//System.out.println("Unable to convert to int.");
+				//e.printStackTrace();
 			}
 		}
 		

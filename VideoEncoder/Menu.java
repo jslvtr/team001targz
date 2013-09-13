@@ -92,8 +92,10 @@ public class Menu {
 	private void viewEncodes() {
 		Video[] videos = lastvideos.getVideosEncoded();
 		for(Video video : videos) {
-			System.out.println(video.getPath() + "\t" + video.getPreviousType() + "\t" + video.getDuration() + "\t");
-			System.out.println("This video took " + video.getEncodeTime() + " ms to encode.");
+			if(video != null) {
+				System.out.println(video.getPath() + "\t" + video.getPreviousType() + "\t" + video.getDuration() + "\t");
+				System.out.println("This video took " + video.getEncodeTime() + " ms to encode.");
+			}		
 		}
 	}
 	

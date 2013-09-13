@@ -91,8 +91,15 @@ public class VideosEncoded {
 				String path = video.getPath();
 				String type = video.getPreviousType();
 				int encodeTime = video.getEncodeTime();
+				
+				System.out.println(path);
+	            System.out.println(duration);
+	            System.out.println(type);
+	            System.out.println(encodeTime + "ms");
+				
 				try {
 					writer.write(path + "," + type + "," + duration + "," + String.valueOf(encodeTime) + "\n");
+					writer.flush();
 				} catch (IOException e) {
 					System.out.println("Error writing Video file info to Last Videos Encoded file.");
 					e.printStackTrace();
@@ -121,6 +128,7 @@ public class VideosEncoded {
 				int encodeTime = video.getEncodeTime();
 				try {
 					writer.write(path + "," + type + "," + duration + "," + String.valueOf(encodeTime) + "\n");
+					writer.flush();
 				} catch (IOException e) {
 					System.out.println("Error writing Video file info to Last Videos Encoded file.");
 					e.printStackTrace();
@@ -129,6 +137,7 @@ public class VideosEncoded {
 			} else {
 				try {
 					writer.write("\n");
+					writer.flush();
 				} catch (IOException e) {
 					System.out.println("Error writing Video file info to Last Videos Encoded file.");
 					e.printStackTrace();
@@ -142,6 +151,7 @@ public class VideosEncoded {
 	public void reset() {
 		try {
 			writer.write("");
+			writer.flush();
 		} catch (IOException e) {
 			System.out.println("Unable to reset last encoded videos.");
 			e.printStackTrace();

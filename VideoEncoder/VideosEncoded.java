@@ -85,16 +85,18 @@ public class VideosEncoded {
 		}
 		newVideos[0] = newVideo;
 		for(Video video : newVideos) {
-			String duration = video.getDuration();
-			String path = video.getPath();
-			String type = video.getPreviousType();
-			int encodeTime = video.getEncodeTime();
-			try {
-				writer.write(path + "," + type + "," + duration + "," + String.valueOf(encodeTime) + "\n");
-			} catch (IOException e) {
-				System.out.println("Error writing Video file info to Last Videos Encoded file.");
-				e.printStackTrace();
-				return false;
+			if(video != null) {
+				String duration = video.getDuration();
+				String path = video.getPath();
+				String type = video.getPreviousType();
+				int encodeTime = video.getEncodeTime();
+				try {
+					writer.write(path + "," + type + "," + duration + "," + String.valueOf(encodeTime) + "\n");
+				} catch (IOException e) {
+					System.out.println("Error writing Video file info to Last Videos Encoded file.");
+					e.printStackTrace();
+					return false;
+				}
 			}
 		}
 		return true;

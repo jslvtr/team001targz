@@ -39,7 +39,7 @@ public class Menu {
 		System.out.println("Enter 0 to reset the last encoded list.");
 		System.out.println("Enter 1 to encode a new video.");
 		System.out.println("Enter 2 to view up to the last 10 encodes.");
-		System.out.print("Your input: ");
+		System.out.print("Enter your option: ");
 	}
 	
 	private int getInput() {

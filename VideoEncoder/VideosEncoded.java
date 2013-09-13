@@ -56,11 +56,9 @@ public class VideosEncoded {
 			line = null;
 		}
 
-		lines = new Video[10];
-
 		for(int i2 = 0; i2 < 10; i2++) {
 			try {
-				lines[i2] = new Video(l.get(i2).split(",")[0], l.get(i2).split(",")[1], l.get(i2).split(",")[2], Integer.parseInt(l.get(i2).split(",")[3]));
+				if(l.get(i2) != null) lines[i2] = new Video(l.get(i2).split(",")[0], l.get(i2).split(",")[1], l.get(i2).split(",")[2], Integer.parseInt(l.get(i2).split(",")[3]));
 			} catch (Exception e) {
 				System.out.println("Unable to convert to int.");
 				e.printStackTrace();

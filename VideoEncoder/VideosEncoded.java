@@ -86,6 +86,7 @@ public class VideosEncoded {
 		newVideos[0] = newVideo;
 		for(Video video : newVideos) {
 			if(video != null) {
+				System.out.println("Hello, world!");
 				String duration = video.getDuration();
 				String path = video.getPath();
 				String type = video.getPreviousType();

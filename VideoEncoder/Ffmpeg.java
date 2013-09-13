@@ -60,6 +60,10 @@ public class Ffmpeg {
         try {
             //Create video object
             video = new Video(dest.getAbsolutePath(), parser.getDuration(), previousType, encodeTime);
+            System.out.println(dest.getAbsolutePath());
+            System.out.println(parser.getDuration());
+            System.out.println(previousType);
+            System.out.println(encodeTime + "ms");
         } catch (Exception ex) {
             //An error occured, tell the user
             System.out.println(ex.getMessage());

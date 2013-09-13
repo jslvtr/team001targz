@@ -56,9 +56,10 @@ public class Ffmpeg {
         
         //Calculate encode time
         int encodeTime = endTime - startTime;
+        Video video = null;
         try {
             //Create video object
-            Video video = new Video(dest.getAbsolutePath(), parser.getDuration(), previousType, encodeTime);
+            video = new Video(dest.getAbsolutePath(), parser.getDuration(), previousType, encodeTime);
         } catch (Exception ex) {
             //An error occured, tell the user
             System.out.println(ex.getMessage());
@@ -67,7 +68,7 @@ public class Ffmpeg {
         
         //Add to queue
         VideosEncoded ve = new VideosEncoded();
-                
+        ve.push(video);
 		
 		//END TIMER (RESULT IN MS)
 		return true;

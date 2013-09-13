@@ -78,6 +78,7 @@ public class Ffmpeg {
             String output = "";
             try {
             	ProcessBuilder pb = cmd == "" ? new ProcessBuilder("ffmpeg", "-i", fileinfo) : new ProcessBuilder(cmd);
+            	pb.redirectErrorStream(true);
             	Process p = pb.start();
             	BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 String line=reader.readLine();

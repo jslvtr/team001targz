@@ -12,13 +12,11 @@ import java.util.List;
 public class VideosEncoded {
 
 	private static final String fileName = "videos_encoded.txt";
-	private static FileWriter writer;
 
 	public VideosEncoded() {
 		File f = new File(fileName);
 		try {
 			f.createNewFile();
-			writer = new FileWriter(fileName);
 		} catch (IOException e) {
 			System.out.println("Error creating videos_encoded.txt file to hold last encoded videos.");
 			e.printStackTrace();
@@ -76,6 +74,12 @@ public class VideosEncoded {
 				System.out.println(videos[i-1].getPath());
 		}
 		newVideos[0] = newVideo;
+		FileWriter writer = null;
+		try {
+			writer = new FileWriter(fileName);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		for(Video video : newVideos) {
 			if(video != null) {
 				System.out.println("Hello, world!");
@@ -100,6 +104,7 @@ public class VideosEncoded {
 		}
 		try {
 			writer.flush();
+			writer.close();
 		} catch (IOException e) {
 			System.out.println("Couldn't flush the writer.");
 			//e.printStackTrace();
@@ -117,6 +122,13 @@ public class VideosEncoded {
 			newVideos[i] = videos[i];
 		}
 		newVideos[videos.length] = null;
+		FileWriter writer = null;
+		try {
+			writer = new FileWriter(fileName);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		for(Video video : newVideos) {
 			if(video != null) {
 				String duration = video.getDuration();
@@ -129,6 +141,12 @@ public class VideosEncoded {
 				} catch (IOException e) {
 					System.out.println("Error writing Video file info to Last Videos Encoded file.");
 					e.printStackTrace();
+					try {
+						writer.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					return false;
 				}
 			} else {
@@ -138,19 +156,44 @@ public class VideosEncoded {
 				} catch (IOException e) {
 					System.out.println("Error writing Video file info to Last Videos Encoded file.");
 					e.printStackTrace();
+					try {
+						writer.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					return false;
 				}
 			}
+		}
+		try {
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return true;
 	}
 	
 	public void reset() {
+		FileWriter writer = null;
+		try {
+			writer = new FileWriter(fileName);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try {
 			writer.write("");
 			writer.flush();
 		} catch (IOException e) {
 			System.out.println("Unable to reset last encoded videos.");
+			e.printStackTrace();
+		}
+		try {
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -7,7 +7,6 @@ public class Menu {
 	
 	private static final int NEW_ENCODE = 1, RESET = 0, VIEW_LAST_ENCODES = 2;
 	private static final Ffmpeg ffmpeg = new Ffmpeg();
-	private static final VideosEncoded lastvideos = new VideosEncoded();
 	
 	public void runMenu() {
 		showMenu();
@@ -86,15 +85,15 @@ public class Menu {
 	}
 	
 	private void reset() {
-		lastvideos.reset();
+		new VideosEncoded().reset();
 	}
 	
 	private void viewEncodes() {
-		Video[] videos = lastvideos.getVideosEncoded();
+		Video[] videos = new VideosEncoded().getVideosEncoded();
 		for(Video video : videos) {
 			if(video != null) {
 				System.out.println(video.getPath() + "\t" + video.getPreviousType() + "\t" + video.getDuration() + "\t");
-				System.out.println("This video took " + video.getEncodeTime() + " ms to encode.");
+				System.out.println("This video took " + video.getEncodeTime() + " s to encode.");
 			}		
 		}
 	}

@@ -72,7 +72,8 @@ public class VideosEncoded {
 		Video[] newVideos = new Video[videos.length];
 		for(int i = 1; i < videos.length; i++) {
 			newVideos[i] = videos[i-1];
-			System.out.println(videos[i-1].getPath());
+			if(videos[i-1] != null) 
+				System.out.println(videos[i-1].getPath());
 		}
 		newVideos[0] = newVideo;
 		for(Video video : newVideos) {
